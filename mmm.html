@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>  تعلم    </title>
+
+</head>
+<style>
+#contenar{width: 700px; margin: 0 auto; background-color: red;}
+img, video {width: 500px; height: 500px;  border-radius: 20px;  border: blue; }
+#contenar div{min-width: 200;max-height: 200; background-color: aqua;}
+img, input, #infovideo{display: none;}
+button { width: 100px;height: 100px; background-color: cornflowerblue;}
+ button img{ width: 70px; height: 70px; border-radius: 50%; display: block;}
+
+</style>
+
+<body>
+
+<div id="contenar" ><!-- this is open div contenar -->
+
+<center>
+ <!-- this Is Open Div1 to img and input-->
+<div id="div1"> 
+<img src=""   id="myImg"   class="iii">
+<input type="file"  id="input_1" accept = "image/*" >     
+</div>
+<!--This IS Close Div1 -->
+ <br/>
+ <div id="infovideo" >
+  <Video id="Video"> </Video>
+  <input type="file" id="dd2" onchange="loadVideo(event)" accept = "Video/*">
+</div>
+<!--This IS Close div2 -->
+<br/>
+<!-- This Is Open Div3 to Audio And Input-->
+<div id="info">
+  <audio id="audio" > </audio>
+  <input type="file" id="dd3" onchange="loadAudio(event)"  accept = "audio/*">
+</div>
+ <!-- This Is Open Div3 -->
+
+<button id="ddd" onclick="oneBlock()">
+  <img src="./my-app/6.png" class="wwwg">
+  <!--<i class="fas fa-photo-video"></i>-->
+</button>
+
+<button id="dd2" onclick="towBlock()">
+  <img src="./my-app/7.png" alt=""  class="" >
+ <!--- <i class="fas fa-file-video"></i> -->
+  </button>
+  
+<button id="dd3" onclick="threeBlock()" >
+  <img src="./my-app/12.png" alt=""class="wwwg" >
+  <!--<i class="fas fa-music"></i>-->
+   </button>
+
+</center>
+
+</div><!-- This Is Close  Contenar Div3 ********-->
+
+
+<script>
+/*function oneBlock(){
+document.getElementById('myImg').click()
+myImg.style.display ="block";
+
+}*/
+function oneBlock(){
+document.getElementById('input_1','myImg').click()
+myImg.style.display = "block";
+//infoV.style.display = "none";
+}
+function towBlock(){
+document.getElementById('dd2').click()
+infovideo.style.display = "block";
+}
+function threeBlock(){
+document.getElementById('dd3').click()
+
+}
+
+/**************************************/
+//for audio script
+
+window.addEventListener('load', function (){
+    document.querySelector('input[ type="file"]').addEventListener('change', function(){ 
+      if(this.files && this.files[0]){
+      let img_1 = document.querySelector("#myImg")
+      img_1.src = URL.createObjectURL(this.files[0]);
+      img_1.onload = imgLoaded;
+      
+      } });});
+/**************************************/
+
+//for audio script
+let audioElement = null;
+
+//امساك الملف 
+window.addEventListener('load', function(){
+    audioElement = document.getElementById('audio');
+})
+function loadAudio(event){
+    let file = event.target.files[0];
+//momo div
+    let info = document.getElementById('info');
+    info.innerHTML =""
+//Remove old audio /حذف الملف القديم 
+audioElement.remove(); 
+//creact new audio / انشاء ملف جديد 
+    audioElement = document.createElement('audio')
+//add controls to audio / اضافة كونترولز لي اوديو
+  audioElement.controls = true;
+//احضار رابط ملف 
+//التاك الخاص بالسورس
+    let source = document.createElement('source')
+//الخاصية الخاصة بالسورس
+   source.src = URL.createObjectURL(file)
+   source.type = file.type
+//add to html /اضافة اتش تي ام ال
+   audioElement.appendChild(source);
+   info.appendChild(audioElement)
+}
+/**************************************/
+
+//for video script
+ 
+let VideoElement = null;
+
+//امساك الملف 
+window.addEventListener('load', function(){
+    VideoElement = document.getElementById('Video');
+})
+function loadVideo(event){
+    let file = event.target.files[0];
+//momo div
+    let infoV = document.getElementById('infovideo');
+    infoV.innerHTML =""
+//Remove old Video /حذف الملف القديم 
+VideoElement.remove(); 
+//creact new Video / انشاء ملف جديد 
+    VideoElement = document.createElement('Video')
+//add controls to Video / اضافة كونترولز لي اوديو
+  VideoElement.controls = true;
+//احضار رابط ملف 
+//التاك الخاص بالسورس
+    let source = document.createElement('source')
+//الخاصية الخاصة بالسورس
+   source.src = URL.createObjectURL(file)
+   source.type = file.type
+// get Video duration / الحصول علي مدة اوديو 
+/*VideoElement.addEventListener('loadeddata',function(event){
+    info.innerHTML = `<div> Duration: ${this.duration}seconds<div>`
+})*/
+//add to html /اضافة اتش تي ام ال
+   VideoElement.appendChild(source);
+   infoV.appendChild(VideoElement)
+}
+
+
+</script>
+</body>
+</html> 
